@@ -15,7 +15,7 @@ exports.createWindow = () => {
     // Open the DevTools.
     win.webContents.openDevTools();
 
-    win.loadURL(`file://${__dirname}/renderer/main.html`);
+    win.loadURL(`file://${__dirname}/index.html`);
 
     // Emitted when the window is closed.
     win.on('closed', function () {
