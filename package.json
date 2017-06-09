@@ -1,0 +1,11 @@
+{
+  "name": "tchecker",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/dmitryt/tchecker",
+  "author": "Dmitry Tselinko <dmitry.tselinko@gmail.com>",
+  "license": "MIT"
+}
