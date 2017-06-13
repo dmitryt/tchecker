@@ -1,0 +1,54 @@
+{
+  "cities": [
+    {
+      "title": "Kyanivka",
+      "region": null,
+      "value": 2200391
+    },
+    {
+      "title": "Kybyntsi",
+      "region": null,
+      "value": 2204196
+    },
+    {
+      "title": "Kychyranky",
+      "region": null,
+      "value": 2048100
+    },
+    {
+      "title": "Kyiv",
+      "region": null,
+      "value": 2200001
+    },
+    {
+      "title": "Kyiv-Demiivskiy",
+      "region": null,
+      "value": 2200004
+    },
+    {
+      "title": "Kyivska Rusanivka",
+      "region": null,
+      "value": 2201180
+    },
+    {
+      "title": "Kyj",
+      "region": null,
+      "value": 2031278
+    },
+    {
+      "title": "Kykshor",
+      "region": null,
+      "value": 2011189
+    },
+    {
+      "title": "Kyn",
+      "region": null,
+      "value": 2030108
+    },
+    {
+      "title": "Kynnu",
+      "region": null,
+      "value": 2600852
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+export const SERVICE_HOST = 'http://booking.uz.gov.ua';
