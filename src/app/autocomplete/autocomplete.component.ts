@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, ViewEncapsulation } fr
 import { Observable, Subject } from 'rxjs/Rx';
 import bem from 'bem-cn';
 
-import {DataService, City} from '../shared';
+import {DataService, ICity} from '../shared';
 
 const selector = 'tch-autocomplete';
 
@@ -14,7 +14,7 @@ const selector = 'tch-autocomplete';
 })
 export class AutocompleteComponent implements OnInit {
   private cls = bem(selector);
-  private citiesList$: Observable<City[]>;
+  private citiesList$: Observable<ICity[]>;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   @Input('label') label: string;
   @ViewChild('inputNode') inputBox: ElementRef;
@@ -34,7 +34,7 @@ export class AutocompleteComponent implements OnInit {
 
   //https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription
   ngOnDestroy() {
-      this.ngUnsubscribe.next();
-      this.ngUnsubscribe.complete();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

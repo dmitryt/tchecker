@@ -9,6 +9,9 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { DataService } from './shared';
 import { FormComponent } from './form/form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { NotificationComponent } from './notification/notification.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,9 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     AutocompleteComponent,
     FormComponent,
     DatepickerComponent,
+    SubscriptionComponent,
+    NotificationComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

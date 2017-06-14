@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import bem from 'bem-cn';
 
@@ -8,6 +8,7 @@ const selector = 'tch-datepicker';
 
 @Component({
   selector,
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })

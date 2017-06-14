@@ -1,0 +1,20 @@
+.tch-subscription {
+  &__arrow-icon {
+    margin-top: 4px;
+  }
+  &__setting-icon {
+    margin-top: 2px;
+    margin-left: 10px;
+    .fa {
+      border-radius: 5px;
+      padding: 5px 6px;
+      background-color: #ccc;
+      color: #fff;
+    }
+    &_active {
+      .fa {
+        background-color: #00d1b2;
+      }
+    }
+  }
+}

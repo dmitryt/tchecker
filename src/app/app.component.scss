@@ -1,0 +1,16 @@
+.tch-root {
+  nav {
+    padding: 5px;
+  }
+
+  .tch-subscription {
+    margin-top: 10px;
+  }
+
+  &__notifications {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+  }
+}

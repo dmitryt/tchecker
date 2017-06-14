@@ -1,2 +1,4 @@
 export {DataService} from './data.service';
-export {City} from './city.model';
+export {ICity} from './city.model';
+export {ISubscription} from './subscription.model';
+export {ITicketTracing} from './ticket-tracing.model';

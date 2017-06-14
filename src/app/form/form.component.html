@@ -1,11 +1,29 @@
-<div class="columns">
-  <div class="column">
-    <tch-autocomplete label="From"></tch-autocomplete>
+<div class="{{cls()}}">
+  <div class="columns">
+    <div class="column">
+      <tch-autocomplete label="From"></tch-autocomplete>
+    </div>
+    <div class="column">
+      <tch-autocomplete label="To"></tch-autocomplete>
+    </div>
+    <div class="column field">
+      <tch-datepicker label="Date"></tch-datepicker>
+    </div>
   </div>
-  <div class="column">
-    <tch-autocomplete label="To"></tch-autocomplete>
+  <div class="field">
+    <p class="control">
+      <label class="checkbox">
+        <input type="checkbox">
+        Set Desktop Notifications
+      </label>
+    </p>
   </div>
-  <div class="column">
-    <tch-datepicker label="Date"></tch-datepicker>
+  <div class="field">
+    <p class="control">
+      <label class="checkbox">
+        <input type="checkbox">
+        Set Email Notifications
+      </label>
+    </p>
   </div>
 </div>

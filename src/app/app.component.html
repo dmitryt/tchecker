@@ -1,3 +1,21 @@
-<div class="container">
-  <tch-form></tch-form>
+<div class="{{cls()}} container">
+  <nav class="nav">
+    <div class="nav-left">
+      <span class="icon is-medium">
+        <i class="fa fa-train"></i>
+      </span>
+      <div>Ticket Checker</div>
+    </div>
+    <div class="nav-right">
+      <a class="button is-primary">+ New</a>
+    </div>
+  </nav>
+  <h3><strong>All Subscriptions({{subscriptions.length}}):</strong></h3>
+  <tch-subscription *ngFor="let subscription of subscriptions" [data]="subscription"></tch-subscription>
+  <div class="{{cls('notifications')}}">
+    <tch-notification></tch-notification>
+  </div>
+  <tch-modal>
+    <tch-form></tch-form>
+  </tch-modal>
 </div>

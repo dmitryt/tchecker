@@ -1,4 +1,4 @@
-export interface City {
-  title: string,
-  value: number,
+export interface ICity {
+  title: string;
+  value: number;
 }
