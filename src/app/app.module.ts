@@ -2,22 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { DatePickerModule } from 'ng2-datepicker';
 
 import { AppComponent } from './app.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { DataService } from './shared';
-import { DummyDirective } from './dummy.directive';
+import { FormComponent } from './form/form.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AutocompleteComponent,
-    DummyDirective,
+    FormComponent,
+    DatepickerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    DatePickerModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
