@@ -9,21 +9,37 @@
     <div class="column field">
       <tch-datepicker label="Date"></tch-datepicker>
     </div>
-  </div>
-  <div class="field">
-    <p class="control">
-      <label class="checkbox">
-        <input type="checkbox">
-        Set Desktop Notifications
-      </label>
-    </p>
-  </div>
-  <div class="field">
-    <p class="control">
-      <label class="checkbox">
-        <input type="checkbox">
-        Set Email Notifications
-      </label>
-    </p>
+    <div class="column is-1">
+      <div class="field has-addons">
+        <!--<p class="control">
+          <a class="button" title="Set Desktop Notifications">
+            <span class="icon is-small">
+              <i class="fa fa-desktop"></i>
+            </span>
+          </a>
+        </p>-->
+        <p class="control">
+          <a class="button" title="Set Email Notifications">
+            <span class="icon is-small">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="column is-2">
+      <a class="button is-primary" (click)="_onSave()">
+        <span class="icon is-small">
+          <i class="fa fa-check"></i>
+        </span>
+        <span>Save</span>
+      </a>
+      <a class="button is-outlined" (click)="_onCancel()">
+        <span>Cancel</span>
+        <span class="icon is-small">
+          <i class="fa fa-times"></i>
+        </span>
+      </a>
+    </div>
   </div>
 </div>

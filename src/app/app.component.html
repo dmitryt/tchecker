@@ -10,12 +10,21 @@
       <a class="button is-primary">+ New</a>
     </div>
   </nav>
-  <h3><strong>All Subscriptions({{subscriptions.length}}):</strong></h3>
-  <tch-subscription *ngFor="let subscription of subscriptions" [data]="subscription"></tch-subscription>
+  <h3><strong>All Subscriptions(0):</strong></h3>
+  <div class="box {{cls('subscription-item')}}" *ngFor="let subscription of (subscriptions$ | async); let i=index">
+    <tch-subscription
+      [data]="subscription"
+      *ngIf="editedItem != subscription"
+      (onEdit)="onEdit(subscription)"
+      (onRemove)="onRemove(i)"
+    ></tch-subscription>
+    <tch-form
+      *ngIf="editedItem == subscription"
+      (onSave)="onSave($event)"
+      (onCancel)="editedItem = null"
+    ></tch-form>
+  </div>
   <div class="{{cls('notifications')}}">
     <tch-notification></tch-notification>
   </div>
-  <tch-modal>
-    <tch-form></tch-form>
-  </tch-modal>
 </div>
