@@ -1,4 +1,6 @@
-const {app} = require('electron');
+const {app, Menu, Tray} = require('electron');
+
+let tray = null;
 
 const mainWindow = require('./mainWindow');
 
@@ -7,7 +9,18 @@ require('electron-reload')(__dirname);
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', mainWindow.createWindow)
+app.on('ready', () => {
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Item1', type: 'radio'},
+    {label: 'Item2', type: 'radio'},
+    {label: 'Item3', type: 'radio', checked: true},
+    {label: 'Item4', type: 'radio'}
+  ]);
+  tray = new Tray('tray-icon.png');
+  tray.setToolTip('Ticket Checker');
+  tray.setContextMenu(contextMenu);
+  mainWindow.createWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

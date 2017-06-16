@@ -8,7 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
-import { DataService, AppState } from './shared';
+import { DataService, DBService, AppState } from './shared';
 import { FormComponent } from './form/form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
@@ -33,7 +33,7 @@ import { ModalComponent } from './modal/modal.component';
     StoreDevtoolsModule.instrumentOnlyWithExtension(), // for debugging
     StoreModule.provideStore(AppState),
   ],
-  providers: [DataService],
+  providers: [DataService, DBService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

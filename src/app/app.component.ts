@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import bem from 'bem-cn';
 
-import {ISubscription, IAppState} from './shared/';
+import {ISubscription, IAppState, DBService} from './shared/';
+import fixtures from '../fixtures/db';
 
 const selector = 'tch-root';
 
@@ -18,13 +19,12 @@ export class AppComponent {
   private subscriptions$: Observable<ISubscription[]>;
   private editedItem: ISubscription;
   private cls = bem(selector);
-  constructor(private store: Store<IAppState>) {
+  constructor(private store: Store<IAppState>, private dbService: DBService) {
     this.subscriptions$ = store.select('subscriptions');
-    // [
-    //   {from: {id: 2200001, value: 'Kyiv'}, to: {id: 2208530, value: 'Kherson'}, lang: 'en', date: '27.06.2017', showDesktopNotifications: true, notifyToEmail: 'hello.world@gmail.com'},
-    //   {from: {id: 2200331, value: 'Vinnytsja'}, to: {id: 2212330, value: 'Kherson'}, lang: 'en', date: '27.06.2017', showDesktopNotifications: false},
-    //   {from: {id: 2223401, value: 'Kharkiv'}, to: {id: 2201230, value: 'Vinnytsja'}, lang: 'en', date: '27.06.2017', showDesktopNotifications: false, notifyToEmail: 'hello.world@gmail.com'},
-    // ];
+  }
+
+  loadFixtures() {
+    this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
   }
 
   onEdit(item: ISubscription) {

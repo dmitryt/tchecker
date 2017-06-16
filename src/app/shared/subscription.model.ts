@@ -4,6 +4,7 @@ interface IDestination {
 }
 
 export interface ISubscription {
+  id?: number;
   from: IDestination;
   to: IDestination;
   date: string;

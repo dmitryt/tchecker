@@ -16,4 +16,5 @@ function getBookingUrls(lang) {
 }
 
 export const URLS = environment.mockServer ? getMockUrls : getBookingUrls;
+export const DATABASE_NAME = 'tch_db';
 export const DATE_FORMAT = 'DD/MM/YYYY';
