@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import bem from 'bem-cn';
 
-import {ISubscription, IAppState, DBService} from './shared/';
+import {ISubscription, IAppState, DBService, FETCH_SUBSCRIPTIONS} from './shared/';
 import fixtures from '../fixtures/db';
 
 const selector = 'tch-root';
@@ -20,6 +20,7 @@ export class AppComponent {
   private editedItem: ISubscription;
   private cls = bem(selector);
   constructor(private store: Store<IAppState>, private dbService: DBService) {
+    store.dispatch({type: FETCH_SUBSCRIPTIONS});
     this.subscriptions$ = store.select('subscriptions');
   }
 

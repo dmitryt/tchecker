@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import Dexie from 'dexie';
 import 'dexie-observable';
 
@@ -13,9 +14,15 @@ export class DBService extends Dexie {
     super(DATABASE_NAME);
 
     this.version(1).stores({
-      subscriptions: '$$uuid, from, to, date, lang',
-      reports: '$$uuid, results, updated_at',
+      subscriptions: '++id, from, to, date, lang',
+      reports: '++id, results, updated_at',
     });
+  }
+
+  getSubscriptions(): Observable<ISubscription[]> {
+    return Observable.fromPromise(
+      <Promise<ISubscription[]>>this.table('subscriptions').toArray()
+    );
   }
 
   loadFixtures(name: string, data: ISubscription[]) {

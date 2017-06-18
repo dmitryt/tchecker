@@ -5,10 +5,11 @@ import { HttpModule } from '@angular/http';
 import { DatePickerModule } from 'ng2-datepicker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
-import { DataService, DBService, AppState } from './shared';
+import { DataService, DBService, AppState, SubscriptionEffects } from './shared';
 import { FormComponent } from './form/form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
@@ -32,6 +33,7 @@ import { ModalComponent } from './modal/modal.component';
     DatePickerModule,
     StoreDevtoolsModule.instrumentOnlyWithExtension(), // for debugging
     StoreModule.provideStore(AppState),
+    EffectsModule.run(SubscriptionEffects)
   ],
   providers: [DataService, DBService],
   bootstrap: [AppComponent]
