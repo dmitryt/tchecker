@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { DatePickerModule } from 'ng2-datepicker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
@@ -30,7 +30,7 @@ import { ModalComponent } from './modal/modal.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    DatePickerModule,
+    MyDatePickerModule,
     StoreDevtoolsModule.instrumentOnlyWithExtension(), // for debugging
     StoreModule.provideStore(AppState),
     EffectsModule.run(SubscriptionEffects)

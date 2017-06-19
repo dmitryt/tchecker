@@ -38,7 +38,7 @@
     "dotenv": "^4.0.0",
     "electron-reload": "^1.2.1",
     "font-awesome": "^4.7.0",
-    "ng2-datepicker": "^1.8.3",
+    "mydatepicker": "^2.0.21",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

@@ -1,7 +1,11 @@
 <div class="{{cls()}}">
   <label>
     <div class="control">
-      <ng2-datepicker [options]="options" [(ngModel)]="date"></ng2-datepicker>
+      <my-date-picker
+        name="mydate"
+        [options]="options"
+        [(ngModel)]="model">
+      </my-date-picker>
     </div>
   </label>
 </div>

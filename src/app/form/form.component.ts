@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter, Output, Input } from '@angular/core';
 import bem from 'bem-cn';
 
-import {DataService, ICity} from '../shared';
+import {DataService, ICity, ISubscription} from '../shared';
 
 const selector = 'tch-form';
 
@@ -13,6 +13,7 @@ const selector = 'tch-form';
 })
 export class FormComponent implements OnInit {
   private cls = bem(selector);
+  @Input('data') data: ISubscription;
   @Output() onSave = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   constructor() {

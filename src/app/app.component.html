@@ -10,7 +10,7 @@
       <a class="button is-primary">+ New</a>
     </div>
   </nav>
-  <h3><strong>All Subscriptions(0):</strong></h3>
+  <h3><strong>All Subscriptions:</strong></h3>
   <div class="box {{cls('subscription-item')}}" *ngFor="let subscription of (subscriptions$ | async); let i=index">
     <tch-subscription
       [data]="subscription"
@@ -20,6 +20,7 @@
     ></tch-subscription>
     <tch-form
       *ngIf="editedItem == subscription"
+      [data]="subscription"
       (onSave)="onSave($event)"
       (onCancel)="editedItem = null"
     ></tch-form>

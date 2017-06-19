@@ -16,6 +16,7 @@ export class AutocompleteComponent implements OnInit {
   private cls = bem(selector);
   private citiesList$: Observable<ICity[]>;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+  @Input('data') data: Object;
   @Input('label') label: string;
   @ViewChild('inputNode') inputBox: ElementRef;
 

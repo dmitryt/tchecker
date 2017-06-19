@@ -1,30 +1,30 @@
 <div class="{{cls()}}">
   <div class="columns">
     <div class="column">
-      <tch-autocomplete label="From"></tch-autocomplete>
+      <tch-autocomplete label="From" [data]="data.from"></tch-autocomplete>
     </div>
     <div class="column">
-      <tch-autocomplete label="To"></tch-autocomplete>
+      <tch-autocomplete label="To" [data]="data.to"></tch-autocomplete>
     </div>
     <div class="column field">
-      <tch-datepicker label="Date"></tch-datepicker>
+      <tch-datepicker label="Date" [date]="data.date"></tch-datepicker>
     </div>
     <div class="column is-1">
       <div class="field has-addons">
-        <!--<p class="control">
+        <p class="control">
           <a class="button" title="Set Desktop Notifications">
             <span class="icon is-small">
               <i class="fa fa-desktop"></i>
             </span>
           </a>
-        </p>-->
-        <p class="control">
+        </p>
+        <!--<p class="control">
           <a class="button" title="Set Email Notifications">
             <span class="icon is-small">
               <i class="fa fa-envelope"></i>
             </span>
           </a>
-        </p>
+        </p>-->
       </div>
     </div>
     <div class="column is-3 has-text-right">
