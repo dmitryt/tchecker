@@ -13,7 +13,7 @@ export class DataService {
 
   getCities(query: string): Observable<ICity[]> {
     const url = URLS(this.lang).CITIES;
-    const filterItems = item => item.title.toLowerCase().indexOf(query) !== -1;
+    const filterItems = item => item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     return this.http.get(url)
       .map(res => res.json().filter(filterItems))
       .catch(err => this.getCities(query))

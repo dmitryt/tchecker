@@ -18,19 +18,19 @@ export class AutocompleteComponent implements OnInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   @Input('data') data: Object;
   @Input('label') label: string;
+  @Input('isValid') isValid: boolean;
   @ViewChild('inputNode') inputBox: ElementRef;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    Observable.fromEvent(this.inputBox.nativeElement, 'keyup')
+    this.citiesList$ = Observable.fromEvent(this.inputBox.nativeElement, 'keyup')
       .takeUntil(this.ngUnsubscribe)
       .map((e: Event) => (<HTMLInputElement>e.target).value)
       .filter(value => Boolean(value))
       .debounceTime(300)
-      .subscribe(q => {
-        this.citiesList$ = this.dataService.getCities(q).takeUntil(this.ngUnsubscribe);
-      });
+      .switchMap(q => this.dataService.getCities(q))
+    ;
   }
 
   //https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription

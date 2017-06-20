@@ -20,8 +20,9 @@ const formattedToday = {
 })
 export class DatepickerComponent implements OnInit {
   private cls = bem(selector);
-  private options: IMyDpOptions = {dateFormat: DATE_FORMAT, disableUntil: formattedToday};
+  private options: IMyDpOptions = {dateFormat: DATE_FORMAT.toLowerCase(), disableUntil: formattedToday};
   private model: Object;
+  @Input('isValid') isValid: boolean;
   @Input('date') date: string;
   @Input('label') label: string;
 

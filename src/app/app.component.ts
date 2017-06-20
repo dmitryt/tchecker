@@ -1,10 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import bem from 'bem-cn';
 
-import {ISubscription, IAppState, DBService, FETCH_SUBSCRIPTIONS} from './shared/';
+import {ISubscription, Subscription, IAppState, DBService, FETCH_SUBSCRIPTIONS} from './shared/';
 import fixtures from '../fixtures/db';
 
 const selector = 'tch-root';
@@ -18,6 +17,7 @@ const selector = 'tch-root';
 export class AppComponent {
   private subscriptions$: Observable<ISubscription[]>;
   private editedItem: ISubscription;
+  private newItem: ISubscription;
   private cls = bem(selector);
   constructor(private store: Store<IAppState>, private dbService: DBService) {
     store.dispatch({type: FETCH_SUBSCRIPTIONS});
@@ -28,13 +28,17 @@ export class AppComponent {
     this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
   }
 
-  onEdit(item: ISubscription) {
+  add() {
+    this.newItem = new Subscription();
+  }
+
+  edit(item: ISubscription) {
     this.editedItem = item;
   }
 
-  onSave(item: ISubscription) {
+  save(item: ISubscription) {
   }
 
-  onRemove(index: number) {
+  remove(index: number) {
   }
 }

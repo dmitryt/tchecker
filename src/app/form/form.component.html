@@ -1,13 +1,13 @@
-<div class="{{cls()}}">
+<form novalidate [formGroup]="form" class="{{cls()}}" (ngSubmit)="_onSave(form.value)">
   <div class="columns">
     <div class="column">
-      <tch-autocomplete label="From" [data]="data.from"></tch-autocomplete>
+      <tch-autocomplete label="From" [(data)]="data.from" [isValid]="form.controls['from'].valid"></tch-autocomplete>
     </div>
     <div class="column">
-      <tch-autocomplete label="To" [data]="data.to"></tch-autocomplete>
+      <tch-autocomplete label="To" [(data)]="data.to" [isValid]="form.controls['to'].valid"></tch-autocomplete>
     </div>
     <div class="column field">
-      <tch-datepicker label="Date" [date]="data.date"></tch-datepicker>
+      <tch-datepicker label="Date" [(date)]="data.date" [isValid]="form.controls['date'].valid"></tch-datepicker>
     </div>
     <div class="column is-1">
       <div class="field has-addons">
@@ -28,12 +28,12 @@
       </div>
     </div>
     <div class="column is-3 has-text-right">
-      <a class="button is-primary" (click)="_onSave()">
+      <button type="submit" class="button is-primary" [disabled]="!form.valid">
         <span class="icon is-small">
           <i class="fa fa-check"></i>
         </span>
         <span>Save</span>
-      </a>
+      </button>
       <a class="button is-outlined" (click)="_onCancel()">
         <span>Cancel</span>
         <span class="icon is-small">
@@ -42,4 +42,4 @@
       </a>
     </div>
   </div>
-</div>
+</form>

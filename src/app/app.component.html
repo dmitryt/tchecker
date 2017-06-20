@@ -7,21 +7,28 @@
       <div>Ticket Checker</div>
     </div>
     <div class="nav-right">
-      <a class="button is-primary">+ New</a>
+      <a class="button is-primary" (click)="add()">+ New</a>
     </div>
   </nav>
   <h3><strong>All Subscriptions:</strong></h3>
+  <div class="box" *ngIf="newItem">
+    <tch-form
+      [data]="newItem"
+      (onSave)="save($event)"
+      (onCancel)="newItem = null"
+    ></tch-form>
+  </div>
   <div class="box {{cls('subscription-item')}}" *ngFor="let subscription of (subscriptions$ | async); let i=index">
     <tch-subscription
       [data]="subscription"
       *ngIf="editedItem != subscription"
-      (onEdit)="onEdit(subscription)"
-      (onRemove)="onRemove(i)"
+      (onEdit)="edit(subscription)"
+      (onRemove)="remove(i)"
     ></tch-subscription>
     <tch-form
       *ngIf="editedItem == subscription"
       [data]="subscription"
-      (onSave)="onSave($event)"
+      (onSave)="save($event)"
       (onCancel)="editedItem = null"
     ></tch-form>
   </div>

@@ -4,14 +4,15 @@
       <input
         #inputNode
         class="input"
+        [ngClass]="{'is-danger': !isValid}"
         type="text"
         [value]="data.value"
         placeholder="{{label}}"
       />
     </div>
   </label>
-  <ul>
-    <li *ngFor="let city of citiesList$ | async">
+  <ul class="{{cls('dropdown')}}">
+    <li class="{{cls('dropdown-item')}}" *ngFor="let city of citiesList$ | async">
       {{city.title}}
     </li>
   </ul>

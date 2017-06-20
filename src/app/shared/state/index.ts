@@ -1,9 +1,6 @@
 import {ISubscription} from '../index';
 import {reducer as subscriptions} from './subscriptions';
-
-export {FETCH_SUBSCRIPTIONS} from './subscriptions';
-
-export {SubscriptionEffects} from './subscriptions/effect';
+export {SubscriptionEffects, FETCH_SUBSCRIPTIONS} from './subscriptions';
 
 export interface IAppState {
   subscriptions: ISubscription[]
