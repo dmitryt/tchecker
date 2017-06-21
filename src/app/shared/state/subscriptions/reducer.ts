@@ -6,6 +6,8 @@ export const ADD_SUBSCRIPTION = `${NS}/ADD_SUBSCRIPTION`;
 export const REMOVE_SUBSCRIPTION = `${NS}/REMOVE_SUBSCRIPTION`;
 export const SUBSCRIPTIONS = `${NS}/SUBSCRIPTIONS`;
 
+export const getSubscriptionsAction = payload => ({ type: SUBSCRIPTIONS, payload });
+
 export function reducer(state = [], {type, payload}) {
   switch(type) {
     case SUBSCRIPTIONS:

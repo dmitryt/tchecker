@@ -3,8 +3,8 @@ import {Observable} from 'rxjs/Observable';
 import Dexie from 'dexie';
 import 'dexie-observable';
 
-import {DATABASE_NAME} from '../../config';
-import {ISubscription, IReport} from './index';
+import {DATABASE_NAME} from '../../../config';
+import {ISubscription, IReport} from '../index';
 
 @Injectable()
 export class DBService extends Dexie {

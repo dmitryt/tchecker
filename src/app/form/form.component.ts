@@ -22,11 +22,12 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    const {from, to, date} = this.data;
+    const {from, to, date, showDesktopNotifications} = this.data;
     this.form = this.fb.group({
       from: this.getDestinationGroup(from),
       to: this.getDestinationGroup(to),
       date: [date, Validators.required],
+      showDesktopNotifications,
     });
   }
 
@@ -35,6 +36,10 @@ export class FormComponent implements OnInit {
       id: [data.id, Validators.required],
       value: [data.value, Validators.required],
     });
+  }
+
+  toggleNotifications(showDesktopNotifications) {
+    this.form.setValue({...this.form.value, showDesktopNotifications});
   }
 
   onDateChange(date) {

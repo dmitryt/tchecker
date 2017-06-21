@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {format} from 'date-fns';
 
-import {DATE_FORMAT} from '../../config';
+import {DATE_FORMAT} from '../../../config';
 
 @Pipe({
   name: 'fdate'

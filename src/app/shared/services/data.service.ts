@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import {URLS} from '../../config';
-import {ICity, ITicketTracing, ISubscription} from './index';
+import {URLS} from '../../../config';
+import {ICity, ITicketTracing, ISubscription} from '../index';
 
 @Injectable()
 export class DataService {
