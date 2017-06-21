@@ -1,18 +1,20 @@
-<div class="{{cls()}} field">
+<div class="{{cls()}} field" [formGroup]="autocompleteGroup">
   <label>
     <div class="control has-icons-right">
       <input
         #inputNode
-        class="input"
-        [ngClass]="{'is-danger': !isValid}"
         type="text"
-        [value]="data.value"
+        class="input"
+        [ngClass]="{'is-danger': autocompleteGroup.invalid}"
+        (keydown)="isListVisible=true"
+        (keyup)="onChange()"
+        formControlName="{{name}}"
         placeholder="{{label}}"
       />
     </div>
   </label>
-  <ul class="{{cls('dropdown')}}">
-    <li class="{{cls('dropdown-item')}}" *ngFor="let city of citiesList$ | async">
+  <ul class="{{cls('dropdown')}}" *ngIf="isListVisible">
+    <li class="{{cls('dropdown-item')}}" (click)="onSelect(city)" *ngFor="let city of citiesList$ | async">
       {{city.title}}
     </li>
   </ul>

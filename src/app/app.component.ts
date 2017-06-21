@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import bem from 'bem-cn';
 
-import {ISubscription, Subscription, IAppState, DBService, FETCH_SUBSCRIPTIONS} from './shared/';
+import {ISubscription, Subscription, IAppState, DBService, FETCH_SUBSCRIPTIONS, UPDATE_SUBSCRIPTION, REMOVE_SUBSCRIPTION} from './shared/';
 import fixtures from '../fixtures/db';
 
 const selector = 'tch-root';
@@ -18,6 +18,7 @@ export class AppComponent {
   private subscriptions$: Observable<ISubscription[]>;
   private editedItem: ISubscription;
   private newItem: ISubscription;
+  private modal: Object;
   private cls = bem(selector);
   constructor(private store: Store<IAppState>, private dbService: DBService) {
     store.dispatch({type: FETCH_SUBSCRIPTIONS});
@@ -28,8 +29,13 @@ export class AppComponent {
     this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
   }
 
-  add() {
+  onAdd() {
     this.newItem = new Subscription();
+  }
+
+  add(item: ISubscription) {
+    this.newItem = null;
+    this.store.dispatch({type: UPDATE_SUBSCRIPTION, payload: item});
   }
 
   edit(item: ISubscription) {
@@ -37,8 +43,23 @@ export class AppComponent {
   }
 
   save(item: ISubscription) {
+    this.editedItem = null;
+    this.store.dispatch({type: UPDATE_SUBSCRIPTION, payload: item});
   }
 
-  remove(index: number) {
+  remove(id) {
+    this.modal = {
+      title: 'Warning',
+      content: 'Are you sure you want to proceed?',
+      itemId: id,
+    };
+  }
+
+  onRemoveApprove(promise, id) {
+    this.modal = null;
+    promise.then(() => {
+      this.store.dispatch({type: REMOVE_SUBSCRIPTION, payload: id});
+    })
+    .catch(() => {});
   }
 }

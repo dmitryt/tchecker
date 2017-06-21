@@ -7,23 +7,23 @@
       <div>Ticket Checker</div>
     </div>
     <div class="nav-right">
-      <a class="button is-primary" (click)="add()">+ New</a>
+      <a class="button is-primary" (click)="onAdd()">+ New</a>
     </div>
   </nav>
   <h3><strong>All Subscriptions:</strong></h3>
   <div class="box" *ngIf="newItem">
     <tch-form
       [data]="newItem"
-      (onSave)="save($event)"
+      (onSave)="add($event)"
       (onCancel)="newItem = null"
     ></tch-form>
   </div>
-  <div class="box {{cls('subscription-item')}}" *ngFor="let subscription of (subscriptions$ | async); let i=index">
+  <div class="box {{cls('subscription-item')}}" *ngFor="let subscription of (subscriptions$ | async)">
     <tch-subscription
       [data]="subscription"
       *ngIf="editedItem != subscription"
       (onEdit)="edit(subscription)"
-      (onRemove)="remove(i)"
+      (onRemove)="remove(subscription.id)"
     ></tch-subscription>
     <tch-form
       *ngIf="editedItem == subscription"
@@ -36,4 +36,5 @@
   <!--<div class="{{cls('notifications')}}">
     <tch-notification></tch-notification>
   </div>-->
+  <tch-modal [title]="modal.title" *ngIf="modal" (onHandle)="onRemoveApprove($event, modal.itemId)">{{modal.content}}</tch-modal>
 </div>

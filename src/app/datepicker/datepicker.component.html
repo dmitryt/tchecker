@@ -2,9 +2,11 @@
   <label>
     <div class="control">
       <my-date-picker
-        name="mydate"
+        class="hello"
         [options]="options"
-        [(ngModel)]="model"
+        [ngModel]="model"
+        (dateChanged)="onDateChanged($event)"
+        required
       ></my-date-picker>
     </div>
   </label>

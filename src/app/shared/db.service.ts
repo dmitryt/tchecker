@@ -20,9 +20,15 @@ export class DBService extends Dexie {
   }
 
   getSubscriptions(): Observable<ISubscription[]> {
-    return Observable.fromPromise(
-      <Promise<ISubscription[]>>this.table('subscriptions').toArray()
-    );
+    return Observable.fromPromise(this.table('subscriptions').toArray());
+  }
+
+  removeSubscription(id): Observable<void> {
+    return Observable.fromPromise(this.table('subscriptions').delete(id));
+  }
+
+  updateSubscription(data: ISubscription): Observable<ISubscription> {
+    return Observable.fromPromise(this.table('subscriptions').put(data));
   }
 
   loadFixtures(name: string, data: ISubscription[]) {

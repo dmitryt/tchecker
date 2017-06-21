@@ -1,6 +1,3 @@
-import {format} from 'date-fns';
-import {DATE_FORMAT} from '../../config';
-
 interface IDestination {
   value: string;
   id?: number;
@@ -24,6 +21,6 @@ export class Subscription implements ISubscription {
   constructor() {
     this.from = {value: ""};
     this.to = {value: ""};
-    this.date = format(new Date(), DATE_FORMAT);
+    this.date = new Date().toISOString();
   }
 }

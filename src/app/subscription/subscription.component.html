@@ -7,7 +7,7 @@
             <strong>{{data.from.value}}</strong>
             <i class="fa fa-long-arrow-right {{cls('arrow-icon')}}" aria-hidden="true"></i>
             <strong>{{data.to.value}}</strong>,
-            <small>{{data.date}}</small>
+            <small>{{data.date | fdate}}</small>
             <span class="icon is-small {{cls('setting-icon', {active: data.showDesktopNotifications})}}">
               <i class="fa fa-desktop" aria-hidden="true"></i>
             </span>

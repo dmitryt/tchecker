@@ -1,13 +1,16 @@
-<div class="{{cls}} modal is-active" [ngClass]="isVisible">
+<div class="{{cls}} modal is-active isVisible">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
-      <button class="delete"></button>
+      <p class="modal-card-title">{{title}}</p>
+      <button class="delete" (click)="onCancel()"></button>
     </header>
     <section class="modal-card-body">
       <ng-content></ng-content>
     </section>
+    <footer class="modal-card-foot">
+      <a class="button is-success" (click)="onOk()">OK</a>
+      <a class="button" (click)="onCancel()">Cancel</a>
+    </footer>
   </div>
-  <button class="modal-close"></button>
 </div>

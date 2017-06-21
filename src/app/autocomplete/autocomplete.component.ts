@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, ViewEncapsulation } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Observable, Subject } from 'rxjs/Rx';
 import bem from 'bem-cn';
 
@@ -16,9 +17,10 @@ export class AutocompleteComponent implements OnInit {
   private cls = bem(selector);
   private citiesList$: Observable<ICity[]>;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
-  @Input('data') data: Object;
+  private isListVisible: boolean;
   @Input('label') label: string;
-  @Input('isValid') isValid: boolean;
+  @Input('name') name: string;
+  @Input('group') autocompleteGroup: FormGroup;
   @ViewChild('inputNode') inputBox: ElementRef;
 
   constructor(private dataService: DataService) {}
@@ -29,8 +31,23 @@ export class AutocompleteComponent implements OnInit {
       .map((e: Event) => (<HTMLInputElement>e.target).value)
       .filter(value => Boolean(value))
       .debounceTime(300)
-      .switchMap(q => this.dataService.getCities(q))
+      .switchMap(q => this.dataService.getCities(q));
     ;
+  }
+
+  onChange() {
+    this.autocompleteGroup.setValue({
+      value: this.autocompleteGroup.value.value,
+      id: null,
+    });
+  }
+
+  onSelect({title, value}) {
+    this.isListVisible = false;
+    this.autocompleteGroup.setValue({
+      value: title,
+      id: value,
+    });
   }
 
   //https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import bem from 'bem-cn';
 
 const selector = 'tch-modal';
@@ -9,11 +9,20 @@ const selector = 'tch-modal';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-  @Input('visible') isVisible: boolean;
+  @Input('title') title: string;
+  @Output() onHandle = new EventEmitter();
   private cls = bem(selector);
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onOk() {
+    this.onHandle.emit(Promise.resolve());
+  }
+
+  onCancel() {
+    this.onHandle.emit(Promise.reject(null));
   }
 
 }

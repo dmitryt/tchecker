@@ -11,7 +11,7 @@ export default {
           "value": "Kherson"
         },
         "lang": "en",
-        "date": "27.06.2017",
+        "date": "2017-06-21T21:00:00.000Z",
         "showDesktopNotifications": true,
         "notifyToEmail": "hello.world@gmail.com"
       },
@@ -25,7 +25,7 @@ export default {
           "value": "Kherson"
         },
         "lang": "en",
-        "date": "27.06.2017",
+        "date": "2017-06-21T21:00:00.000Z",
         "showDesktopNotifications": false
       },
       {
@@ -38,7 +38,7 @@ export default {
           "value": "Vinnytsja"
         },
         "lang": "en",
-        "date": "27.06.2017",
+        "date": "2017-06-21T21:00:00.000Z",
         "showDesktopNotifications": false,
         "notifyToEmail": "hello.world@gmail.com"
       }

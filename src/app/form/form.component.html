@@ -1,13 +1,13 @@
 <form novalidate [formGroup]="form" class="{{cls()}}" (ngSubmit)="_onSave(form.value)">
   <div class="columns">
     <div class="column">
-      <tch-autocomplete label="From" [(data)]="data.from" [isValid]="form.controls['from'].valid"></tch-autocomplete>
+      <tch-autocomplete label="From" [group]="form.controls.from" name="value" ></tch-autocomplete>
     </div>
     <div class="column">
-      <tch-autocomplete label="To" [(data)]="data.to" [isValid]="form.controls['to'].valid"></tch-autocomplete>
+      <tch-autocomplete label="To" [group]="form.controls.to" name="value" ></tch-autocomplete>
     </div>
     <div class="column field">
-      <tch-datepicker label="Date" [(date)]="data.date" [isValid]="form.controls['date'].valid"></tch-datepicker>
+      <tch-datepicker label="Date" [value]="form.controls.date.value" (onChange)="onDateChange($event)" ></tch-datepicker>
     </div>
     <div class="column is-1">
       <div class="field has-addons">

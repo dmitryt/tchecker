@@ -1,15 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, EventEmitter, Output, Input } from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import bem from 'bem-cn';
 
 import {DataService, ICity, ISubscription} from '../shared';
 
 const selector = 'tch-form';
-var f = new FormControl()
-
-function validateDestination(c: FormControl) {
-  return c.value.id ? null : {validateDestination: {valid: false}};
-}
 
 @Component({
   selector,
@@ -29,14 +24,25 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     const {from, to, date} = this.data;
     this.form = this.fb.group({
-      from: new FormControl(from, validateDestination),
-      to: new FormControl(to, validateDestination),
-      date: new FormControl(date, Validators.required),
+      from: this.getDestinationGroup(from),
+      to: this.getDestinationGroup(to),
+      date: [date, Validators.required],
     });
   }
 
-  _onSave() {
-    this.onSave.emit();
+  getDestinationGroup(data) {
+    return this.fb.group({
+      id: [data.id, Validators.required],
+      value: [data.value, Validators.required],
+    });
+  }
+
+  onDateChange(date) {
+    this.form.setValue({...this.form.value, date});
+  }
+
+  _onSave(data) {
+    this.onSave.emit({...this.data, ...data});
   }
 
   _onCancel() {

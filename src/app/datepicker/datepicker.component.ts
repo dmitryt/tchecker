@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import {IMyDpOptions} from 'mydatepicker';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import bem from 'bem-cn';
+import {parse} from 'date-fns';
 
 import {DATE_FORMAT} from '../../config';
 
@@ -22,16 +24,21 @@ export class DatepickerComponent implements OnInit {
   private cls = bem(selector);
   private options: IMyDpOptions = {dateFormat: DATE_FORMAT.toLowerCase(), disableUntil: formattedToday};
   private model: Object;
-  @Input('isValid') isValid: boolean;
-  @Input('date') date: string;
-  @Input('label') label: string;
+  @Input('value') value: string;
+  @Output() onChange = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
-    const [day, month, year] = this.date.split(/\D/).map(el => parseInt(el, 10));
+    // const date = parse(this.formGroup.value[this.name]);
+    const date = parse(this.value);
+    const [day, month, year] = [date.getDate(), date.getMonth() + 1, date.getFullYear()];
     this.model = {date: {year, day, month}};
+  }
+
+  onDateChanged(event: IMyDateModel) {
+    this.onChange.emit(event.jsdate ? event.jsdate.toISOString() : null);
   }
 
 }
