@@ -15,8 +15,12 @@ export class DBService extends Dexie {
 
     this.version(1).stores({
       subscriptions: '++id, from, to, date, lang',
-      reports: '++id, results, updated_at',
+      reports: '++id, subscription_id, created_at, data',
     });
+  }
+
+  getReports(): Observable<IReport[]> {
+    return Observable.fromPromise(this.table('reports').toArray());
   }
 
   getSubscriptions(): Observable<ISubscription[]> {
@@ -31,7 +35,11 @@ export class DBService extends Dexie {
     return Observable.fromPromise(this.table('subscriptions').put(data));
   }
 
-  loadFixtures(name: string, data: ISubscription[]) {
+  addSubscription(data: ISubscription): Observable<void> {
+    return Observable.fromPromise(this.table('subscriptions').add(data));
+  }
+
+  loadFixtures(name: string, data: ISubscription[]|IReport[]) {
     this.table(name).bulkAdd(data).then(function(lastKey) {
       console.log("Items were added successfully");
     }).catch(Dexie.BulkError, function (e) {

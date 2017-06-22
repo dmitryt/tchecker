@@ -11,6 +11,7 @@
             <span class="icon is-small {{cls('setting-icon', {active: data.showDesktopNotifications})}}">
               <i class="fa fa-desktop" aria-hidden="true"></i>
             </span>
+            <a class="button is-primary" (click)="showReports()">Show Reports</a>
             <!--<span class="icon is-small {{cls('setting-icon', {active: !!data.notifyToEmail})}}">
               <i class="fa fa-envelope" title="{{data.notifyToEmail}}" aria-hidden="true"></i>
             </span>-->
@@ -27,4 +28,7 @@
       <i class="fa fa-trash {{cls('edit-icon')}}" (click)="_onRemove()" title="Remove"></i>
     </span>
   </div>
+  <tch-modal title="Reports" *ngIf="modal" [buttons]="false" (onHandle)="onCloseDialog($event)">
+    <tch-report *ngFor="let report of (modal.reports$ | async)" [data]="report"></tch-report>
+  </tch-modal>
 </div>

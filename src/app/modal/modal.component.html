@@ -8,7 +8,7 @@
     <section class="modal-card-body">
       <ng-content></ng-content>
     </section>
-    <footer class="modal-card-foot">
+    <footer class="modal-card-foot" *ngIf="buttons">
       <a class="button is-success" (click)="onOk()">OK</a>
       <a class="button" (click)="onCancel()">Cancel</a>
     </footer>

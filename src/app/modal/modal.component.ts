@@ -10,6 +10,7 @@ const selector = 'tch-modal';
 })
 export class ModalComponent implements OnInit {
   @Input('title') title: string;
+  @Input('buttons') buttons: boolean = true;
   @Output() onHandle = new EventEmitter();
   private cls = bem(selector);
   constructor() { }

@@ -15,6 +15,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ModalComponent } from './modal/modal.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ModalComponent } from './modal/modal.component';
     NotificationComponent,
     ModalComponent,
     FdatePipe,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,

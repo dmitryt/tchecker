@@ -1,15 +1,15 @@
 
 const NS = 'tch';
-export const PUSH_NOTIFICATION = `${NS}/PUSH_NOTIFICATION`;
+export const REPORTS = `${NS}/REPORTS`;
+export const FETCH_REPORTS = `${NS}/FETCH_REPORTS`;
 export const REMOVE_NOTIFICATION = `${NS}/REMOVE_NOTIFICATION`;
 
-export const pushNotificationAction = payload => ({type: PUSH_NOTIFICATION, payload});
-export const removeNotificationAction = payload => ({type: REMOVE_NOTIFICATION, payload});
+export const getReportsAction = payload => ({ type: REPORTS, payload });
 
 export function reducer(state = [], {type, payload}) {
   switch(type) {
-    case PUSH_NOTIFICATION:
-      return [...state, payload];
+    case REPORTS:
+      return [...payload];
     case REMOVE_NOTIFICATION:
       const index = state.map(n => n.id).indexOf(payload);
       if (index === -1) {

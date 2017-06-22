@@ -1,12 +1,6 @@
-import {ISubscription} from './index';
-
-interface IResult {
-  subscriptio: ISubscription;
-  data: Object;
-}
-
 export interface IReport {
   id?: number;
-  updated_at: Date;
-  results: IResult[];
+  created_at: string;
+  subscription_id: number;
+  data: any;
 }

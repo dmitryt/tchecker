@@ -10,8 +10,10 @@ import {
   IAppState,
   DBService,
   NotificationService,
+  FETCH_REPORTS,
   FETCH_SUBSCRIPTIONS,
   UPDATE_SUBSCRIPTION,
+  ADD_SUBSCRIPTION,
   REMOVE_SUBSCRIPTION
 } from './shared/';
 import fixtures from '../fixtures/db';
@@ -38,12 +40,14 @@ export class AppComponent {
   )
   {
     store.dispatch({type: FETCH_SUBSCRIPTIONS});
+    store.dispatch({type: FETCH_REPORTS});
     this.subscriptions$ = store.select('subscriptions');
     this.notifications$ = store.select('notifications');
   }
 
   loadFixtures() {
     this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
+    this.dbService.loadFixtures('reports', fixtures.reports);
   }
 
   onAdd() {
@@ -52,7 +56,7 @@ export class AppComponent {
 
   add(item: ISubscription) {
     this.newItem = null;
-    this.store.dispatch({type: UPDATE_SUBSCRIPTION, payload: item});
+    this.store.dispatch({type: ADD_SUBSCRIPTION, payload: item});
   }
 
   edit(item: ISubscription) {
@@ -80,7 +84,7 @@ export class AppComponent {
     .catch(() => {});
   }
 
-  onNotificationRemove(index) {
-    this.notificationService.remove(index);
+  onNotificationRemove(id) {
+    this.notificationService.remove(id);
   }
 }
