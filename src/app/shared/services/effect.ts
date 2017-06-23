@@ -40,25 +40,25 @@ export class SubscriptionEffects {
     }
   }
 
-  updateSubscriptions({type, msg, modifier}) {
+  updateSubscriptions({type, message, modifier}) {
     return this.actions$
     .ofType(type)
     .switchMap(modifier)
     .switchMap(() => {
       const cb = this.fetchSubscriptions();
-      this.notificationService.push(msg);
+      this.notificationService.push({message});
       return cb();
     });
   }
 
   @Effect() addedSubs$ = this.updateSubscriptions({
-    type: ADD_SUBSCRIPTION, msg: ITEM_ADD_MSG, modifier: ({payload}) => this.dbService.addSubscription(payload)
+    type: ADD_SUBSCRIPTION, message: ITEM_ADD_MSG, modifier: ({payload}) => this.dbService.addSubscription(payload)
   });
   @Effect() updatedSubs$ = this.updateSubscriptions({
-    type: UPDATE_SUBSCRIPTION, msg: ITEM_UPDATE_MSG, modifier: ({payload}) => this.dbService.updateSubscription(payload)
+    type: UPDATE_SUBSCRIPTION, message: ITEM_UPDATE_MSG, modifier: ({payload}) => this.dbService.updateSubscription(payload)
   });
   @Effect() removedSubs$ = this.updateSubscriptions({
-    type: REMOVE_SUBSCRIPTION, msg: ITEM_REMOVE_MSG, modifier: ({payload}) => this.dbService.removeSubscription(payload)
+    type: REMOVE_SUBSCRIPTION, message: ITEM_REMOVE_MSG, modifier: ({payload}) => this.dbService.removeSubscription(payload)
   });
 
   @Effect() subscriptions$ = this.actions$

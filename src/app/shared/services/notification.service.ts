@@ -12,10 +12,10 @@ export class NotificationService {
   constructor(private store: Store<IAppState>) {
   }
 
-  push(content: string) {
-    const payload = {content, id: new Date().getTime()};
-    this.store.dispatch(pushNotificationAction(payload));
-    setTimeout(() => this.remove(payload.id), TIMEOUT);
+  push(payload) {
+    const id = new Date().getTime();
+    this.store.dispatch(pushNotificationAction({...payload, id}));
+    setTimeout(() => this.remove(id), TIMEOUT);
   }
 
   remove(id: number) {

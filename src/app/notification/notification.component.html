@@ -1,4 +1,6 @@
-  <div class="{{cls()}} notification is-success">
+  <div class="{{cls()}} notification is-success"
+    [ngClass]="{'is-danger': data.type == 'error', 'is-warning': data.type == 'warning'}"
+  >
     <button class="delete" (click)="_onRemove()"></button>
-    {{data.content}}
+    {{data.message}}
   </div>

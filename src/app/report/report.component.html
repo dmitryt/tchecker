@@ -1,5 +1,28 @@
 <div class="{{cls()}}">
+  <b><i>{{report.created_at | date:datetimeFormat}}</i></b>
   <div *ngFor="let value of values">
-    {{value | json}}
+    <div class="columns">
+      <div class="column is-1">
+        <b>{{value.num}}</b>
+      </div>
+      <div class="column">
+        {{value.from?.station}} -<br/>
+        {{value.till?.station}}
+      </div>
+      <div class="column">
+        <small>
+          {{value.from?.src_date | date:datetimeFormat}}<br/>
+          {{value.till?.src_date | date:datetimeFormat}}
+        </small>
+      </div>
+      <div class="column is-1">
+        {{value.travel_time}}
+      </div>
+      <div class="column is-2">
+        <div *ngFor="let type of value.types">
+          <b title="{{type.title}}">{{type.id}}</b>:{{type.places}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>

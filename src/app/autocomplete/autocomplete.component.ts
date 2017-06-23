@@ -31,7 +31,7 @@ export class AutocompleteComponent implements OnInit {
       .map((e: Event) => (<HTMLInputElement>e.target).value)
       .filter(value => Boolean(value))
       .debounceTime(300)
-      .switchMap(q => this.dataService.getCities(q));
+      .switchMap(q => this.dataService.getCities(q))
     ;
   }
 

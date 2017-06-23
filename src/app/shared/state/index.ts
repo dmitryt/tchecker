@@ -9,7 +9,8 @@ export { getReportsAction, FETCH_REPORTS } from './reports/';
 
 export interface INotification {
   id: number;
-  content: string;
+  type: string;
+  message: string;
 }
 
 export interface IAppState {

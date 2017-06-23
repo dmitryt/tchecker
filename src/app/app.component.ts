@@ -45,10 +45,10 @@ export class AppComponent {
     this.notifications$ = store.select('notifications');
   }
 
-  loadFixtures() {
-    this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
-    this.dbService.loadFixtures('reports', fixtures.reports);
-  }
+  // loadFixtures() {
+  //   this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
+  //   this.dbService.loadFixtures('reports', fixtures.reports);
+  // }
 
   onAdd() {
     this.newItem = new Subscription();

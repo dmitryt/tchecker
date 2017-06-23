@@ -13,6 +13,7 @@ const selector = 'tch-report';
 export class ReportComponent implements OnInit {
   private cls = bem(selector);
   private values: Array<Object>;
+  private datetimeFormat = 'dd.MM.yyyy HH:mm';
   @Input('data') report: IReport;
   constructor() { }
 

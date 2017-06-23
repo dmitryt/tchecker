@@ -4,19 +4,25 @@ import { Observable } from 'rxjs/Rx';
 
 import {URLS} from '../../../config';
 import {ICity, ITicketTracing, ISubscription} from '../index';
+import {NotificationService} from './notification.service';
 
 @Injectable()
 export class DataService {
   private lang: string = 'en';
-  constructor(private http: Http) {
+  constructor(private http: Http, private notificationService: NotificationService) {
   }
 
   getCities(query: string): Observable<ICity[]> {
     const url = URLS(this.lang).CITIES;
-    const filterItems = item => item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    return this.http.get(url)
-      .map(res => res.json().filter(filterItems))
-      .catch(err => this.getCities(query))
+    return this.http.get(url, {params: {term: query}})
+      .map(res => res.json())
+      .catch(err => {
+        this.notificationService.push({
+          message: 'Cannot fetch data from remote server',
+          type: 'error',
+        });
+        return [];
+      });
     ;
   }
 

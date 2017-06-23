@@ -32,7 +32,7 @@
       (onCancel)="editedItem = null"
     ></tch-form>
   </div>
-  <a class="button is-primary" (click)="loadFixtures()">Load Fixtures</a>
+  <!--<a class="button is-primary" (click)="loadFixtures()">Load Fixtures</a>-->
   <div class="{{cls('notifications')}}">
     <tch-notification
       *ngFor="let notification of (notifications$ | async)"
