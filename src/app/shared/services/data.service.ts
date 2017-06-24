@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, URLSearchParams, RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import {Store} from '@ngrx/store';
+import request from 'superagent';
 
-import {URLS} from '../../../config';
-import {ICity, ITicketTracing, ISubscription} from '../index';
+import {URLS, MONITORING_INTERVAL} from '../../../config';
+import {ICity, IReport, ISubscription, IAppState} from '../index';
 import {NotificationService} from './notification.service';
 
 @Injectable()
 export class DataService {
   private lang: string = 'en';
-  constructor(private http: Http, private notificationService: NotificationService) {
-  }
+  constructor(
+    private http: Http,
+    private notificationService: NotificationService,
+    private store: Store<IAppState>
+  ) {}
 
   getCities(query: string): Observable<ICity[]> {
     const url = URLS(this.lang).CITIES;
@@ -26,20 +31,46 @@ export class DataService {
     ;
   }
 
+  monitor(p) {
+    var s = Observable
+      .interval(2000)
+      .switchMap(() => this.store.select('subscriptions'))
+      .forEach(r => console.log(r));
+    console.log(s);
+      // .subscribe(r => console.log(r));
+    //     console.log(arr[0]);
+    //     if (arr[0]) {
+    //       this.getTickets(arr[0]).subscribe(res => console.log(res));
+    //     }
+    //   });
+
+    // const exec = () => {
+    //   return this.store.select('subscriptions').subscribe(arr => {
+    //     console.log(arr[0]);
+    //     if (arr[0]) {
+    //       this.getTickets(arr[0]).subscribe(res => console.log(res));
+    //     }
+    //   });
+    // };
+    // return exec();
+  }
+
   prepareParams({from, to, date}: ISubscription) {
     return {
-      station_from: from.value,
       station_id_from: from.id,
-      station_till: from.value,
-      station_id_till: from.id,
+      station_id_till: to.id,
       date_dep: date,
+      time_dep:"00:00"
     };
   }
 
-  getTickets(params: ISubscription): Observable<ITicketTracing[]> {
+  getTickets(params: ISubscription): Observable<IReport[]> {
     const url = URLS(this.lang).TICKETS;
-    const defaultParams = {time_dep:"00:00", time_dep_till:"", another_ec:0, search:""};
-    return this.http.post(url, {...this.prepareParams(params), ...defaultParams}).map(res => res.json());
+    const _params = {...this.prepareParams(params)};
+    _params.date_dep = '07.10.2017';
+    const __params = Object.keys(_params).reduce((acc, k) => {
+      return acc.concat([`${k}=${_params[k]}`]);
+    }, []);
+    return this.http.post(url, new URLSearchParams(__params.join('&'))).map(res => res.json());
   }
-
 }

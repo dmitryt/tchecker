@@ -8,16 +8,16 @@ let win;
 
 exports.createWindow = () => {
   win = new BrowserWindow({
-    width: 500,
+    width: 800,
     height: 650,
-    minWidth: 350,
-    maxWidth: 650,
+    minWidth: 800,
+    maxWidth: 1050,
     minHeight: 310,
   });
-
   if (process.env.PACKAGE === 'true'){
+    console.log(__dirname);
     win.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
+      pathname: path.join(__dirname, '../dist/index.html'),
       protocol: 'file:',
       slashes: true
     }));

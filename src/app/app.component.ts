@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import bem from 'bem-cn';
@@ -9,6 +9,7 @@ import {
   INotification,
   IAppState,
   DBService,
+  DataService,
   NotificationService,
   FETCH_REPORTS,
   FETCH_SUBSCRIPTIONS,
@@ -26,7 +27,7 @@ const selector = 'tch-root';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private subscriptions$: Observable<ISubscription[]>;
   private notifications$: Observable<INotification[]>;
   private editedItem: ISubscription;
@@ -37,6 +38,7 @@ export class AppComponent {
     private store: Store<IAppState>,
     private dbService: DBService,
     private notificationService: NotificationService,
+    private dataService: DataService,
   )
   {
     store.dispatch({type: FETCH_SUBSCRIPTIONS});
@@ -45,10 +47,15 @@ export class AppComponent {
     this.notifications$ = store.select('notifications');
   }
 
-  // loadFixtures() {
-  //   this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
-  //   this.dbService.loadFixtures('reports', fixtures.reports);
-  // }
+  ngOnInit() {
+    const form = document.getElementById('myform');
+    this.dataService.monitor(new FormData(<HTMLFormElement>form));
+  }
+
+  loadFixtures() {
+    this.dbService.loadFixtures('subscriptions', fixtures.subscriptions);
+    this.dbService.loadFixtures('reports', fixtures.reports);
+  }
 
   onAdd() {
     this.newItem = new Subscription();

@@ -1,4 +1,6 @@
-const {app, Menu, Tray} = require('electron');
+const {app, Menu, Tray, remote} = require('electron');
+
+const MONITORING_INTERVAL = 10 * 3600 * 1000;
 
 let tray = null;
 
@@ -10,11 +12,17 @@ require('electron-reload')(__dirname);
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  let isMonitoring = false;
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'radio'},
-    {label: 'Item2', type: 'radio'},
-    {label: 'Item3', type: 'radio', checked: true},
-    {label: 'Item4', type: 'radio'}
+    {label: 'Start Monitoring', type: 'checkbox', click: () => {
+      isMonitoring = !isMonitoring;
+      contextMenu.items[0].checked = isMonitoring;
+      console.log(mainWindow.getWeb());
+    }},
+    {type: 'separator'},
+    {label: 'Exit', click: () => {
+      app.quit();
+    }},
   ]);
   tray = new Tray('tray-icon.png');
   tray.setToolTip('Ticket Checker');
@@ -38,8 +46,3 @@ app.on('activate', function () {
     mainWindow.createWindow()
   }
 });
-
-
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
