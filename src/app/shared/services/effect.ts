@@ -7,6 +7,7 @@ import {
   getSubscriptionsAction,
   getReportsAction,
   FETCH_REPORTS,
+  ADD_REPORTS,
   FETCH_SUBSCRIPTIONS,
   ADD_SUBSCRIPTION,
   UPDATE_SUBSCRIPTION,
@@ -18,6 +19,7 @@ import {NotificationService} from './notification.service';
 const ITEM_UPDATE_MSG = 'Item has been updated successfully';
 const ITEM_ADD_MSG = 'Item has been added successfully';
 const ITEM_REMOVE_MSG = 'Item has been removed successfully';
+const REPORTS_ADD_MSG = 'Reports have been generated successfully';
 
 @Injectable()
 export class SubscriptionEffects {
@@ -28,6 +30,16 @@ export class SubscriptionEffects {
     private notificationService: NotificationService,
   ) {
 
+  }
+
+  fetchReports() {
+    return () => {
+      return this.dbService.getReports()
+      // If successful, dispatch success action with result
+      .map(payload => getReportsAction(payload))
+      // If request fails, dispatch failed action
+      .catch(() => Observable.of({ type: 'REQUEST_FAILED' }))
+    };
   }
 
   fetchSubscriptions() {
@@ -66,14 +78,24 @@ export class SubscriptionEffects {
     .switchMap(this.fetchSubscriptions())
   ;
 
+  @Effect() addedReports$ = this.actions$
+    .ofType(ADD_REPORTS)
+    .switchMap(({payload}) => {
+      return this.dbService.addReports(payload);
+    })
+    .switchMap(() => {
+      const cb = this.fetchReports();
+      this.notificationService.push({message: REPORTS_ADD_MSG});
+      return cb();
+    })
+    .catch(s => {
+      debugger;
+      return [];
+    })
+  ;
+
   @Effect() reports$ = this.actions$
     .ofType(FETCH_REPORTS)
-    .switchMap(() => {
-      return this.dbService.getReports()
-      // If successful, dispatch success action with result
-      .map(payload => getReportsAction(payload))
-      // If request fails, dispatch failed action
-      .catch(() => Observable.of({ type: 'REQUEST_FAILED' }))
-    });
+    .switchMap(this.fetchReports());
   ;
 }

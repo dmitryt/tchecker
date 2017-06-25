@@ -9,7 +9,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
-import { DataService, DBService, NotificationService, AppState, SubscriptionEffects, FdatePipe } from './shared';
+import { DataService, DBService, NotificationService, AppState, SubscriptionEffects, FdatePipe, TimePipe } from './shared';
 import { FormComponent } from './form/form.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
@@ -27,6 +27,7 @@ import { ReportComponent } from './report/report.component';
     NotificationComponent,
     ModalComponent,
     FdatePipe,
+    TimePipe,
     ReportComponent,
   ],
   imports: [

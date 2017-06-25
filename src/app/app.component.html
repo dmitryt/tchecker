@@ -6,7 +6,19 @@
       </span>
       <div>Ticket Checker</div>
     </div>
+    <div class="nav-center">
+      Next Monitoring in&nbsp;<b>{{time | time}}</b>
+    </div>
     <div class="nav-right">
+      <ul class="{{cls('lang-selector')}}">
+        <li
+          *ngFor="let _lang of languages"
+          [ngClass]="{'active': lang == _lang}"
+          (click)="setLang(_lang)"
+        >
+          <span class="text">{{_lang}}</span>
+        </li>
+      </ul>
       <a class="button is-primary" (click)="onAdd()">+ New</a>
     </div>
   </nav>

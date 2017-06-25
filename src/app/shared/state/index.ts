@@ -5,7 +5,7 @@ import {reducer as reports} from './reports';
 
 export { getSubscriptionsAction, FETCH_SUBSCRIPTIONS, UPDATE_SUBSCRIPTION, ADD_SUBSCRIPTION, REMOVE_SUBSCRIPTION} from './subscriptions';
 export { pushNotificationAction, removeNotificationAction } from './notifications/';
-export { getReportsAction, FETCH_REPORTS } from './reports/';
+export { getReportsAction, addReportsAction, FETCH_REPORTS, ADD_REPORTS } from './reports/';
 
 export interface INotification {
   id: number;

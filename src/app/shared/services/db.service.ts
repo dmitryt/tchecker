@@ -19,8 +19,12 @@ export class DBService extends Dexie {
     });
   }
 
+  addReports(data: IReport): Observable<void> {
+    return Observable.fromPromise(this.table('reports').add(data));
+  }
+
   getReports(): Observable<IReport[]> {
-    return Observable.fromPromise(this.table('reports').toArray());
+    return Observable.fromPromise(this.table('reports').reverse().toArray());
   }
 
   getSubscriptions(): Observable<ISubscription[]> {
@@ -28,7 +32,13 @@ export class DBService extends Dexie {
   }
 
   removeSubscription(id): Observable<void> {
-    return Observable.fromPromise(this.table('subscriptions').delete(id));
+    return Observable.fromPromise(
+      this.table('reports')
+      .where({subscription_id: id})
+      .primaryKeys()
+      .then(ids => this.table('reports').bulkDelete(ids))
+      .then(() => this.table('subscriptions').delete(id))
+    );
   }
 
   updateSubscription(data: ISubscription): Observable<ISubscription> {
