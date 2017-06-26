@@ -7,16 +7,21 @@
       <div>Ticket Checker</div>
     </div>
     <div class="nav-center">
-      Next Monitoring in&nbsp;<b>{{time | time}}</b>
+      <a class="button" (click)="toggleMonitoring()"
+        [ngClass]="{'is-primary': !timer, 'is-warning': !!timer, 'is-loading': time <= 0}"
+      >
+        {{timer ? 'Stop Monitoring ' + (time > 0 ? (time | time) : '' ) : 'Start Monitoring'}}
+      </a>
+      <!--Next Monitoring in&nbsp;<b>{{time | time}}</b>-->
     </div>
     <div class="nav-right">
       <ul class="{{cls('lang-selector')}}">
         <li
-          *ngFor="let _lang of languages"
-          [ngClass]="{'active': lang == _lang}"
-          (click)="setLang(_lang)"
+          *ngFor="let lang of languages"
+          [ngClass]="{'active': lang == dataService.lang}"
+          (click)="setLang(lang)"
         >
-          <span class="text">{{_lang}}</span>
+          <span class="text">{{lang}}</span>
         </li>
       </ul>
       <a class="button is-primary" (click)="onAdd()">+ New</a>

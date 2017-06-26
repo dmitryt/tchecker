@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription as _Subscription } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import bem from 'bem-cn';
 
@@ -29,8 +29,8 @@ const selector = 'tch-root';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private lang: string;
-  private time: number;
+  private timer: _Subscription;
+  private time: any;
   private languages: string[];
   private subscriptions$: Observable<ISubscription[]>;
   private notifications$: Observable<INotification[]>;
@@ -46,8 +46,6 @@ export class AppComponent implements OnInit {
   )
   {
     this.languages = ['en', 'ru'];
-    this.lang = dataService.getLang();
-    this.time = MONITORING_INTERVAL;
     store.dispatch({type: FETCH_SUBSCRIPTIONS});
     store.dispatch({type: FETCH_REPORTS});
     this.subscriptions$ = store.select('subscriptions');
@@ -56,7 +54,32 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.dataService.monitor();
+  }
+
+  destroyTimer() {
+    if (this.timer) {
+      this.timer.unsubscribe();
+      this.timer = null;
+    }
+  }
+
+  initTimer() {
+    this.time = MONITORING_INTERVAL;
+    this.timer = Observable.timer(0,1000).subscribe(t => {
+      this.time = MONITORING_INTERVAL - t * 1000;
+      if (this.time < 0) {
+        this.dataService.monitor();
+        this.destroyTimer();
+        this.initTimer();
+      }
+    });
+  }
+
+  toggleMonitoring() {
+    if (this.timer) {
+      return this.destroyTimer();
+    }
+    this.initTimer();
   }
 
   loadFixtures() {
@@ -65,8 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   setLang(lang) {
-    this.lang = lang;
-    this.dataService.setLang(lang);
+    this.dataService.lang = lang;
   }
 
   onAdd() {

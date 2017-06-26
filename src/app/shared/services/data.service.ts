@@ -1,93 +1,94 @@
 import { Injectable } from '@angular/core';
-import {Http, URLSearchParams, RequestOptionsArgs} from '@angular/http';
+import {Http} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import {Store} from '@ngrx/store';
-import request from 'superagent';
+import {format} from 'date-fns';
 
-import {URLS, MONITORING_INTERVAL} from '../../../config';
+import {URLS, DATE_FORMAT_EN, DATE_FORMAT_RU, MONITORING_INTERVAL} from '../../../config';
 import {ICity, IReport, ISubscription, IAppState} from '../index';
 import {NotificationService} from './notification.service';
 import {addReportsAction} from '../state';
 
+declare var Notification: {
+  prototype: Notification;
+  new(title: string, options?: NotificationOptions): Notification;
+  readonly permission: any;
+  requestPermission(callback?: NotificationPermissionCallback): Promise<any>;
+}
+
 @Injectable()
 export class DataService {
-  private lang: string = 'en';
+  public lang: string = 'en';
   constructor(
     private http: Http,
     private notificationService: NotificationService,
     private store: Store<IAppState>
   ) {}
 
-  getLang() {
-    return this.lang;
-  }
-
-  setLang(lang) {
-    this.lang = lang;
-  }
-
-  getCities(query: string): Observable<ICity[]> {
+  getCities(query: string): Observable<any> {
     const url = URLS(this.lang).CITIES;
     return this.http.get(url, {params: {term: query}})
       .map(res => res.json())
       .catch(err => {
         this.notificationService.push({
-          message: 'Cannot fetch data from remote server',
+          message: err,
           type: 'error',
         });
         return [];
-      });
+      })
     ;
   }
 
   monitor() {
-    this.store.select('subscriptions').forEach((list:ISubscription[]) => {
-      list.forEach(s => {
-        const subscription_id = s.id;
-        this.getAvailablePlaces(s).subscribe(data => {
+    return this.store.select('subscriptions')
+      .concatMap((list:ISubscription[]) => Observable.of(list))
+      .flatMap((list:ISubscription[]) => {
+        return list.map(item => this.getAvailablePlaces(item))
+      })
+      .subscribe(report$ => {
+        report$.subscribe((data:IReport) => {
+          const {subscription_id} = data;
           const payload = {subscription_id, data, created_at: new Date().toISOString()};
           this.store.dispatch(addReportsAction(payload));
         });
-      });
-    });
-    // Observable.interval(2000)
-    //   .switchMap(() => this.store.select('subscriptions'))
-    //   .forEach(r => console.log(r));
-    // console.log(s);
-      // .subscribe(r => console.log(r));
-    //     console.log(arr[0]);
-    //     if (arr[0]) {
-    //       this.getTickets(arr[0]).subscribe(res => console.log(res));
-    //     }
-    //   });
-
-    // const exec = () => {
-    //   return this.store.select('subscriptions').subscribe(arr => {
-    //     console.log(arr[0]);
-    //     if (arr[0]) {
-    //       this.getTickets(arr[0]).subscribe(res => console.log(res));
-    //     }
-    //   });
-    // };
-    // return exec();
+      })
   }
 
   prepareParams({from, to, date}: ISubscription) {
     return {
       station_id_from: from.id,
       station_id_till: to.id,
-      date_dep: date,
-      time_dep:"00:00"
+      date_dep: format(date, this.lang === 'en' ? DATE_FORMAT_EN : DATE_FORMAT_RU),
     };
   }
 
-  getAvailablePlaces(params: ISubscription): Observable<IReport[]> {
+  getAvailablePlaces(data: ISubscription): Observable<IReport> {
     const url = URLS(this.lang).TICKETS;
-    const _params = {...this.prepareParams(params)};
-    _params.date_dep = '07.10.2017';
-    const __params = Object.keys(_params).reduce((acc, k) => {
-      return acc.concat([`${k}=${_params[k]}`]);
-    }, []);
-    return this.http.post(url, new URLSearchParams(__params.join('&'))).map(res => res.json());
+    const params = {...this.prepareParams(data)};
+    return this.http.get(url, {params})
+      .map(res => {
+        const _data = res.json();
+        if (_data.error) {
+          throw new Error(_data.value);
+        }
+        return {..._data, subscription_id: data.id};
+      })
+      .catch(err => {
+        this.notificationService.push({
+          message: err,
+          type: 'error',
+        });
+        return [];
+      })
+    ;
+  }
+
+  pushDesktopNotification(msg) {
+    const exec = () => new Notification(msg);
+    if (Notification.permission === 'granted') {
+      exec();
+    } else if (Notification.permission !== 'denied' || Notification.permission === "default") {
+      Notification.requestPermission().then(() => exec());
+    }
   }
 }

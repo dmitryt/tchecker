@@ -15,6 +15,9 @@ const leadZero = v => v < 10 ? `0${v}` : v;
 export class TimePipe implements PipeTransform {
 
   transform(value: number, args?: any): any {
+    if (isNaN(value)) {
+      return value;
+    }
     const hours = Math.floor(value / MS_IN_HOURS) % HOURS_IN_DAY;
     const minutes = Math.floor(value / MS_IN_MINUTES) % MINUTES_IN_HOURS;
     const seconds = Math.floor(value / MS_IN_SECONDS) % SECONDS_IN_MINUTES;

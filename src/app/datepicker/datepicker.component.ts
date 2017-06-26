@@ -4,7 +4,7 @@ import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 import bem from 'bem-cn';
 import {parse} from 'date-fns';
 
-import {DATE_FORMAT} from '../../config';
+import {DATE_FORMAT_RU} from '../../config';
 
 const selector = 'tch-datepicker';
 const today = new Date();
@@ -22,7 +22,7 @@ const formattedToday = {
 })
 export class DatepickerComponent implements OnInit {
   private cls = bem(selector);
-  private options: IMyDpOptions = {dateFormat: DATE_FORMAT.toLowerCase(), disableUntil: formattedToday};
+  private options: IMyDpOptions = {dateFormat: DATE_FORMAT_RU.toLowerCase(), disableUntil: formattedToday};
   private model: Object;
   @Input('value') value: string;
   @Output() onChange = new EventEmitter();

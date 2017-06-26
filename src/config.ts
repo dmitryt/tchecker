@@ -8,14 +8,15 @@ function getMockUrls() {
   };
 }
 function getBookingUrls(lang) {
-  const BOOKING_HOST = `http://booking.uz.gov.ua/${lang}/purchase`;
+  const BOOKING_HOST = `http://localhost:3000/${lang}`;
   return {
-    CITIES: `${BOOKING_HOST}/station`,
-    TICKETS: `${BOOKING_HOST}/search/`,
+    CITIES: `${BOOKING_HOST}/cities`,
+    TICKETS: `${BOOKING_HOST}/tickets`,
   };
 }
 
 export const URLS = environment.mockServer ? getMockUrls : getBookingUrls;
 export const DATABASE_NAME = 'tch_db';
-export const DATE_FORMAT = 'DD.MM.YYYY';
+export const DATE_FORMAT_RU = 'DD.MM.YYYY';
+export const DATE_FORMAT_EN = 'MM.DD.YYYY';
 export const MONITORING_INTERVAL = 10 * 60 * 1000;
