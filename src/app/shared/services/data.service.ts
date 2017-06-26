@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import {Store} from '@ngrx/store';
 import {format} from 'date-fns';
@@ -62,10 +62,17 @@ export class DataService {
     };
   }
 
+  _stringifyQuery(query) {
+    const params = Object.keys(query).reduce((acc, k) => {
+      return acc.concat([`${k}=${query[k]}`]);
+    }, []);
+    return new URLSearchParams(params.join('&'));
+  }
+
   getAvailablePlaces(data: ISubscription): Observable<IReport> {
     const url = URLS(this.lang).TICKETS;
-    const params = {...this.prepareParams(data)};
-    return this.http.get(url, {params})
+    const body = this._stringifyQuery(this.prepareParams(data));
+    return this.http.post(url, body)
       .map(res => {
         const _data = res.json();
         if (_data.error) {

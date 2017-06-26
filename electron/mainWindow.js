@@ -1,9 +1,9 @@
 const {BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
+const argv = require('yargs').argv;
 
 require('dotenv').config();
-
 let win;
 
 exports.createWindow = () => {
@@ -14,17 +14,16 @@ exports.createWindow = () => {
     maxWidth: 1050,
     minHeight: 310,
   });
-  if (process.env.PACKAGE === 'true'){
-    console.log(__dirname);
+  if (argv.dev === 'true'){
+    win.loadURL(process.env.HOST);
+    // Open the DevTools.
+    win.webContents.openDevTools();
+  } else {
     win.loadURL(url.format({
       pathname: path.join(__dirname, '../dist/index.html'),
       protocol: 'file:',
       slashes: true
     }));
-  } else {
-    win.loadURL(process.env.HOST);
-    // Open the DevTools.
-    win.webContents.openDevTools();
   }
   // Emitted when the window is closed.
   win.on('closed', function () {

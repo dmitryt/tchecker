@@ -3,7 +3,8 @@ const Router = require('koa-router');
 const url = require('url');
 const request = require('request');
 const cors = require('koa2-cors');
-// const querystring = require('querystring');
+const koaBody = require('koa-body');
+const serve = require('koa-static');
 
 const app = new Koa();
 const router = new Router();
@@ -28,9 +29,9 @@ router
       });
     })
   })
-  .get('/:lang/tickets', function (ctx, next) {
+  .post('/:lang/tickets', function (ctx, next) {
     const {lang} = ctx.params;
-    const form = getParams(ctx.req.url);
+    const form = ctx.request.body;
     ///https://github.com/request/request/issues/2619
     form.hasOwnProperty = k => Object.prototype.hasOwnProperty.call(formData, k);
 
@@ -48,6 +49,8 @@ router
 ;
 
 app
+  .use(serve('dist'))
+  .use(koaBody())
   .use(cors())
   .use(router.routes())
   .use(router.allowedMethods())

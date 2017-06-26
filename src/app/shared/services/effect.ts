@@ -15,6 +15,7 @@ import {
 } from '../state';
 
 import {NotificationService} from './notification.service';
+import {DataService} from './data.service';
 
 const ITEM_UPDATE_MSG = 'Item has been updated successfully';
 const ITEM_ADD_MSG = 'Item has been added successfully';
@@ -28,6 +29,7 @@ export class SubscriptionEffects {
     private actions$: Actions,
     private dbService: DBService,
     private notificationService: NotificationService,
+    private dataService: DataService,
   ) {
 
   }
@@ -85,7 +87,7 @@ export class SubscriptionEffects {
     })
     .switchMap(() => {
       const cb = this.fetchReports();
-      this.notificationService.push({message: REPORTS_ADD_MSG});
+      this.dataService.pushDesktopNotification(REPORTS_ADD_MSG);
       return cb();
     })
     .catch(s => {
