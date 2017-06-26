@@ -1,5 +1,7 @@
 import {environment} from 'environments/environment';
 
+declare var process: any;
+
 // function getServiceUrls(lang) {
 //   const HOST = `http://booking.uz.gov.ua/${lang}/purchase`;
 //   return {
@@ -8,7 +10,8 @@ import {environment} from 'environments/environment';
 //   };
 // }
 function getProxyUrls(lang) {
-  const HOST = `http://localhost:3000/${lang}`;
+  const PORT = process.env.PORT || 5000;
+  const HOST = `http://localhost:${PORT}/${lang}`;
   return {
     CITIES: `${HOST}/cities`,
     TICKETS: `${HOST}/tickets`,

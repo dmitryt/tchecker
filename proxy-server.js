@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Koa = require('koa');
 const Router = require('koa-router');
 const url = require('url');
@@ -58,4 +59,4 @@ app
   .use(router.allowedMethods())
 ;
 
-app.listen(3000);
+app.listen(process.env.PORT || 5000);
