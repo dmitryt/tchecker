@@ -4,7 +4,7 @@
   "repository": "https://github.com/dmitryt/tchecker",
   "author": "Dmitry Tselinko <dmitry.tselinko@gmail.com>",
   "license": "MIT",
-  "main": "proxy-server.js",
+  "main": "electron/main.js",
   "scripts": {
     "ng": "ng",
     "start": "npm run proxy",
@@ -43,6 +43,7 @@
     "font-awesome": "^4.7.0",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
+    "koa-favicon": "^2.0.0",
     "koa-router": "^7.2.1",
     "koa-static": "^3.0.0",
     "koa2-cors": "^2.0.3",
