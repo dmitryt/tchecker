@@ -4,7 +4,7 @@
   "repository": "https://github.com/dmitryt/tchecker",
   "author": "Dmitry Tselinko <dmitry.tselinko@gmail.com>",
   "license": "MIT",
-  "main": "electron/main.js",
+  "main": "proxy-server.js",
   "scripts": {
     "ng": "ng",
     "start": "npm run proxy",
