@@ -80,12 +80,6 @@
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@^4.0.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.2.0.tgz#a21df81995b210f822ffd70b57247d474876fbed"
-  dependencies:
-    tslib "^1.7.1"
-
 "@angular/core@^4.0.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.2.0.tgz#8bf57d01379c2a9e29476ad569dec9e20d5b17dc"
