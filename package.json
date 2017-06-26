@@ -7,7 +7,7 @@
   "main": "electron/main.js",
   "scripts": {
     "ng": "ng",
-    "start": "npm run proxy",
+    "start": "npm run build && npm run proxy",
     "start:web": "concurrently 'ng serve' 'npm run proxy'",
     "start:desktop": "concurrently 'npm run proxy' 'ng build && electron .'",
     "start:desktop:dev": "concurrently 'npm run proxy' 'ng serve' 'electron . --dev=true'",
@@ -43,7 +43,6 @@
     "font-awesome": "^4.7.0",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
-    "koa-favicon": "^2.0.0",
     "koa-router": "^7.2.1",
     "koa-static": "^3.0.0",
     "koa2-cors": "^2.0.3",

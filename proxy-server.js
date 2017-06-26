@@ -6,7 +6,6 @@ const request = require('request');
 const cors = require('koa2-cors');
 const koaBody = require('koa-body');
 const serve = require('koa-static');
-const favicon = require('koa-favicon');
 
 const app = new Koa();
 const router = new Router();
@@ -51,7 +50,6 @@ router
 ;
 
 app
-  .use(favicon(__dirname + '/dist/favicon.ico'))
   .use(serve('dist'))
   .use(koaBody())
   .use(cors())
