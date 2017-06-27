@@ -1716,10 +1716,12 @@ var _a, _b;
 // }
 function getProxyUrls(lang) {
     var PORT = process.env.PORT || 5000;
-    var HOST = "http://localhost:" + PORT + "/" + lang;
+    var HOST = process.env.HOST || 'localhost';
+    var BASE = "http://localhost:" + PORT + "/" + lang;
+    console.log(process.env);
     return {
-        CITIES: HOST + "/cities",
-        TICKETS: HOST + "/tickets",
+        CITIES: BASE + "/cities",
+        TICKETS: BASE + "/tickets",
     };
 }
 var URLS = getProxyUrls;

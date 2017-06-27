@@ -15,7 +15,7 @@ exports.createWindow = () => {
     minHeight: 310,
   });
   if (argv.dev === 'true'){
-    win.loadURL(process.env.HOST);
+    win.loadURL(process.env.DEV_HOST);
     // Open the DevTools.
     win.webContents.openDevTools();
   } else {

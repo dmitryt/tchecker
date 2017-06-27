@@ -11,10 +11,12 @@ declare var process: any;
 // }
 function getProxyUrls(lang) {
   const PORT = process.env.PORT || 5000;
-  const HOST = `http://localhost:${PORT}/${lang}`;
+  const HOST = process.env.HOST || 'localhost';
+  const BASE = `http://localhost:${PORT}/${lang}`;
+  console.log(process.env);
   return {
-    CITIES: `${HOST}/cities`,
-    TICKETS: `${HOST}/tickets`,
+    CITIES: `${BASE}/cities`,
+    TICKETS: `${BASE}/tickets`,
   };
 }
 export const URLS = getProxyUrls;
