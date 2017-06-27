@@ -10,8 +10,11 @@ declare var process: any;
 //   };
 // }
 function getProxyUrls(lang) {
-  const {protocol, hostname} = location;
-  const BASE = `${protocol}//${hostname}:$__PORT__$/${lang}`;
+  const {protocol} = location;
+  const HOST = location.hostname || 'localhost';
+  const PORT = process.env.PORT || 5000;
+  const BASE = `http://${HOST}:${PORT}/${lang}`;
+  // const BASE = `${protocol}//${hostname}:$__PORT__$/${lang}`;
   return {
     CITIES: `${BASE}/cities`,
     TICKETS: `${BASE}/tickets`,

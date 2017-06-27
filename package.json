@@ -9,11 +9,12 @@
     "ng": "ng",
     "start": "sed -i -e s/\\\\\\$__PORT__\\\\\\$/$PORT/g dist/main.bundle.js && npm run proxy",
     "start:web": "concurrently 'ng serve' 'npm run proxy'",
-    "start:desktop": "concurrently 'npm run proxy' 'ng build && electron .'",
+    "start:desktop": "concurrently 'ng build && npm start' 'electron .'",
     "start:desktop:dev": "concurrently 'npm run proxy' 'ng serve' 'electron . --dev=true'",
     "proxy": "node proxy-server.js",
     "proxy:dev": "nodemon proxy-server.js",
     "build": "ng build",
+    "build:prod": "ng build --env=prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
