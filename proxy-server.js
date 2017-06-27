@@ -10,8 +10,6 @@ const serve = require('koa-static');
 const app = new Koa();
 const router = new Router();
 
-console.log(process.env);
-
 const getParams = urlStr => url.parse(urlStr, true).query;
 const getUrl = ({lang, suffix}) => {
   return `http://booking.uz.gov.ua/${lang}/purchase/${suffix}`;

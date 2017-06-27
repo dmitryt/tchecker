@@ -1716,9 +1716,8 @@ var _a, _b;
 // }
 function getProxyUrls(lang) {
     var PORT = process.env.PORT || 5000;
-    var HOST = process.env.HOST || 'localhost';
-    var BASE = "http://localhost:" + PORT + "/" + lang;
-    console.log(process.env);
+    var HOST = location.hostname;
+    var BASE = "http://" + HOST + ":" + PORT + "/" + lang;
     return {
         CITIES: BASE + "/cities",
         TICKETS: BASE + "/tickets",
