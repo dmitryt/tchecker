@@ -11,8 +11,8 @@ declare var process: any;
 // }
 function getProxyUrls(lang) {
   const PORT = process.env.PORT || 5000;
-  const HOST = location.hostname;
-  const BASE = `http://${HOST}:${PORT}/${lang}`;
+  const {protocol, hostname} = location;
+  const BASE = `${protocol}//${hostname}:${PORT}/${lang}`;
   return {
     CITIES: `${BASE}/cities`,
     TICKETS: `${BASE}/tickets`,
