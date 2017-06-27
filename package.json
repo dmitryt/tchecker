@@ -7,7 +7,7 @@
   "main": "electron/main.js",
   "scripts": {
     "ng": "ng",
-    "start": "npm run proxy",
+    "start": "sed -i -e s/\\\\\\$__PORT__\\\\\\$/$PORT/g dist/main.bundle.js && npm run proxy",
     "start:web": "concurrently 'ng serve' 'npm run proxy'",
     "start:desktop": "concurrently 'npm run proxy' 'ng build && electron .'",
     "start:desktop:dev": "concurrently 'npm run proxy' 'ng serve' 'electron . --dev=true'",

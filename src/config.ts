@@ -10,9 +10,8 @@ declare var process: any;
 //   };
 // }
 function getProxyUrls(lang) {
-  const PORT = process.env.PORT || 5000;
   const {protocol, hostname} = location;
-  const BASE = `${protocol}//${hostname}:${PORT}/${lang}`;
+  const BASE = `${protocol}//${hostname}:$__PORT__$/${lang}`;
   return {
     CITIES: `${BASE}/cities`,
     TICKETS: `${BASE}/tickets`,

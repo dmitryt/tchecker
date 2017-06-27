@@ -1702,7 +1702,7 @@ var _a, _b;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return URLS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return URLS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DATABASE_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DATE_FORMAT_RU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return DATE_FORMAT_EN; });
@@ -1715,9 +1715,8 @@ var _a, _b;
 //   };
 // }
 function getProxyUrls(lang) {
-    var PORT = process.env.PORT || 5000;
     var protocol = location.protocol, hostname = location.hostname;
-    var BASE = protocol + "//" + hostname + ":" + PORT + "/" + lang;
+    var BASE = protocol + "//" + hostname + ":$__PORT__$/" + lang;
     return {
         CITIES: BASE + "/cities",
         TICKETS: BASE + "/tickets",
@@ -1730,7 +1729,6 @@ var DATE_FORMAT_EN = 'MM.DD.YYYY';
 var MONITORING_INTERVAL = 1 * 60 * 1000;
 // export const MONITORING_INTERVAL = 10 * 60 * 1000; 
 //# sourceMappingURL=config.js.map
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("../../../../process/browser.js")))
 
 /***/ }),
 

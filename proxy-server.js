@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Koa = require('koa');
 const Router = require('koa-router');
 const url = require('url');
@@ -58,3 +57,5 @@ app
 ;
 
 app.listen(process.env.PORT || 5000);
+
+console.log('Start server at port ', process.env.PORT || 5000);
